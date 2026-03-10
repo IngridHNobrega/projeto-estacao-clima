@@ -1,0 +1,27 @@
+name: Validação da Estação Meteorológica
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  validar:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Baixar o código
+        uses: actions/checkout@v3
+
+      - name: Instalar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.10
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Rodar verificação de dados
+        run: python scripts/validar_dados.py
